@@ -1,9 +1,6 @@
 package dao;
 
-import dao.interfaces.AdventurerDAO;
-import dao.interfaces.EntityDAO;
-import dao.interfaces.ItemDAO;
-import dao.interfaces.LordDAO;
+import dao.interfaces.*;
 
 import java.sql.Connection;
 
@@ -18,6 +15,6 @@ public abstract class DAOFactory {
     public abstract ItemDAO getItemDAO();
     public abstract EntityDAO getEntityDAO();
     public abstract LordDAO getLordDAO();
-
-    public abstract Connection createConnection();
+    public abstract InventoryDAO getInventoryDAO();
+    public abstract MonsterDAO getMonsterDAO();
 }

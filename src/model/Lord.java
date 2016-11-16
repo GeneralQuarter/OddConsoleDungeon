@@ -5,4 +5,25 @@ package model;
  *
  */
 public class Lord {
+    private int id;
+    private String login;
+    private boolean blocked;
+
+    public Lord(int id, String login, boolean blocked) {
+        this.id = id;
+        this.login = login;
+        this.blocked = blocked;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
 }
