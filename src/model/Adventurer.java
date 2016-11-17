@@ -21,7 +21,8 @@ public class Adventurer {
         this.status = status;
     }
 
-    public Adventurer(String name) {
+    public Adventurer(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

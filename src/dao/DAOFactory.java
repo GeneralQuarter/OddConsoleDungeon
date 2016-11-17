@@ -1,6 +1,7 @@
 package dao;
 
 import dao.interfaces.*;
+import dao.oracle.OracleDAOFactory;
 
 import java.sql.Connection;
 
@@ -17,4 +18,16 @@ public abstract class DAOFactory {
     public abstract LordDAO getLordDAO();
     public abstract InventoryDAO getInventoryDAO();
     public abstract MonsterDAO getMonsterDAO();
+
+    public abstract void actionsOnClose();
+
+    public static DAOFactory getDAOFactory(int whichFactory) {
+
+        switch (whichFactory) {
+            case ORACLE:
+                return new OracleDAOFactory();
+            default:
+                return null;
+        }
+    }
 }

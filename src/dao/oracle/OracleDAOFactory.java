@@ -13,14 +13,17 @@ import java.sql.SQLException;
  *
  */
 public class OracleDAOFactory extends DAOFactory{
-    public static String connectionUrl;
-    public static String username;
-    public static String password;
+    private static String connectionUrl;
+    private static String username;
+    private static String password;
+    private static Connection con;
 
-    public OracleDAOFactory(String connectionUrl, String username, String password) {
-        OracleDAOFactory.connectionUrl = connectionUrl;
-        OracleDAOFactory.username = username;
-        OracleDAOFactory.password = password;
+    public OracleDAOFactory() {
+        OCDProperties ocdProp = new OCDProperties();
+        connectionUrl = ocdProp.getProperty("connection");
+        username = ocdProp.getProperty("username");
+        password = ocdProp.getProperty("password");
+        con = getConnection();
     }
 
     @Override
@@ -53,19 +56,38 @@ public class OracleDAOFactory extends DAOFactory{
         return new OracleMonsterDAO();
     }
 
-    public static Connection createConnection() {
-        Connection con;
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:@" + OracleDAOFactory.connectionUrl, OracleDAOFactory.username, OracleDAOFactory.password);
+    @Override
+    public void actionsOnClose() {
+        closeConnection();
+    }
+
+    public static Connection getConnection() {
+        if(con == null) {
+            try {
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                con = DriverManager.getConnection("jdbc:oracle:thin:@" + connectionUrl, username, password);
+                return con;
+            } catch (ClassNotFoundException e) {
+                System.err.println("Where is your Oracle JDBC Driver?");
+                e.printStackTrace();
+            } catch (SQLException e) {
+                System.err.println("Connection Failed! Check output console");
+                e.printStackTrace();
+            }
+            return null;
+        } else {
             return con;
-        } catch (ClassNotFoundException e) {
-            System.err.println("Where is your Oracle JDBC Driver?");
-            e.printStackTrace();
-        } catch(SQLException e) {
-            System.err.println("Connection Failed! Check output console");
+        }
+    }
+
+    public static void closeConnection() {
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error closing the connection");
             e.printStackTrace();
         }
-        return null;
     }
 }

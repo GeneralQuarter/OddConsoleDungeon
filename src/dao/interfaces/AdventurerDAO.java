@@ -16,8 +16,9 @@ public interface AdventurerDAO {
     void sellItem(Adventurer adventurer, Item item);
     void nextFight(Adventurer adventurer);
     void flee(Adventurer adventurer);
-    List<Adventurer> getAdventurerOfLord(Lord lord);
+    List<Adventurer> getAdventurersOfLord(Lord lord);
     Adventurer createAdventurer(Lord lord, String name);
     Adventurer getCurrentAdventurer(Lord lord);
+    Adventurer find(int id);
 
 }

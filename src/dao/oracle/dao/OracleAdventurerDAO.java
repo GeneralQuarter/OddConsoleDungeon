@@ -18,18 +18,7 @@ public class OracleAdventurerDAO implements AdventurerDAO {
     private Connection con;
 
     public OracleAdventurerDAO() {
-        con = OracleDAOFactory.createConnection();
-    }
-
-    public void closeConnection() {
-        try {
-            if(con != null) {
-                con.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("Failed closing connection");
-            e.printStackTrace();
-        }
+        con = OracleDAOFactory.getConnection();
     }
 
     private void closeStatement(Statement stm) {
@@ -117,7 +106,7 @@ public class OracleAdventurerDAO implements AdventurerDAO {
     }
 
     @Override
-    public List<Adventurer> getAdventurerOfLord(Lord lord) {
+    public List<Adventurer> getAdventurersOfLord(Lord lord) {
         CallableStatement stm = null;
         ResultSet rs = null;
         List<Adventurer> results = new ArrayList<>();
@@ -151,11 +140,55 @@ public class OracleAdventurerDAO implements AdventurerDAO {
 
     @Override
     public Adventurer createAdventurer(Lord lord, String name) {
-        return null;
+        CallableStatement cStm = null;
+        Adventurer result = null;
+        try {
+            cStm = con.prepareCall("{? = call createAdventurer(?, ?)}");
+            cStm.registerOutParameter(1, Types.INTEGER);
+            cStm.setInt(2, lord.getId());
+            cStm.setString(3, name);
+            cStm.execute();
+            int returnId = cStm.getInt(1);
+            result = find(returnId);
+        } catch (SQLException e) {
+            System.err.println("Error calling createAdventurer");
+            e.printStackTrace();
+        } finally {
+            closeStatement(cStm);
+        }
+        return result;
     }
 
     @Override
     public Adventurer getCurrentAdventurer(Lord lord) {
+
+        return null;
+    }
+
+    @Override
+    public Adventurer find(int id) {
+        PreparedStatement pStm = null;
+        ResultSet rs = null;
+        Adventurer result;
+        try {
+            pStm = con.prepareStatement("SELECT * FROM Adventurer WHERE adventurerID = ?");
+            pStm.setInt(1, id);
+            rs = pStm.executeQuery();
+            if (rs.next()) {
+                result = new Adventurer(
+                        rs.getInt("adventurerID"),
+                        rs.getString("name"),
+                        rs.getInt("entityID"),
+                        rs.getInt("dungeonID"),
+                        rs.getInt("shopID"),
+                        ""
+                );
+                return result;
+            }
+        } catch (SQLException e) {
+            closeResultSet(rs);
+            closeStatement(pStm);
+        }
         return null;
     }
 }
