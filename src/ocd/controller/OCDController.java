@@ -41,15 +41,11 @@ public class OCDController {
 
     private void initializeCommands() {
         commands = new ArrayList<>();
-        commands.add(new SwitchAdventurerCommand(lordDAO, adventurerDAO));
-        commands.add(new ExitShopCommand(entityDAO));
-        commands.add(new EnterShopCommand(entityDAO));
-        commands.add(new StatusCommand(entityDAO));
-        commands.add(new ConsultShopCommand(itemDAO));
-        commands.add(new CreateAdventurerCommand(adventurerDAO));
-        commands.add(new ListAdventurerCommand(adventurerDAO));
         commands.add(new RegisterCommand(lordDAO));
         commands.add(new LoginCommand(lordDAO, adventurerDAO));
+        commands.add(new StatusCommand(entityDAO));
+        commands.add(new AdventurerCommands(lordDAO, adventurerDAO));
+        commands.add(new ShopCommands(itemDAO, entityDAO, adventurerDAO));
         commands.add(new ExitCommand());
         commands.add(new HelpCommand(commands));
         commandParser = new OCDCommandParser(commands);

@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.shop;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;
@@ -9,15 +9,15 @@ import ocd.dao.interfaces.ItemDAO;
 import java.util.List;
 
 /**
- * Created by Quentin Gangler on 20/11/2016.
+ * Created by Quentin Gangler on 21/11/2016.
  *
  */
-public class ConsultShopCommand extends OCDCommand{
+public class ConsultCommand extends OCDCommand {
 
     private ItemDAO itemDAO;
 
-    public ConsultShopCommand(ItemDAO itemDAO) {
-        super("shop.consult", 0, "consult the items in the shop");
+    public ConsultCommand(ItemDAO itemDAO) {
+        super("consult", 0, "consult the items in the shop");
         this.itemDAO = itemDAO;
     }
 

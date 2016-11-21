@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.adventurers;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;
@@ -9,16 +9,16 @@ import ocd.dao.interfaces.AdventurerDAO;
 import ocd.dao.interfaces.LordDAO;
 
 /**
- * Created by Quentin Gangler on 20/11/2016.
+ * Created by Quentin Gangler on 21/11/2016.
  *
  */
-public class SwitchAdventurerCommand extends OCDCommand {
+public class SwitchCommand extends OCDCommand {
 
     private LordDAO lordDAO;
     private AdventurerDAO adventurerDAO;
 
-    public SwitchAdventurerCommand(LordDAO lordDAO, AdventurerDAO adventurerDAO) {
-        super("adventurers.switch", 1, "change to another adventurer");
+    public SwitchCommand(LordDAO lordDAO, AdventurerDAO adventurerDAO) {
+        super("switch", 1, "change to another adventurer");
         this.lordDAO = lordDAO;
         this.adventurerDAO = adventurerDAO;
     }

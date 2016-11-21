@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.adventurers;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;
@@ -7,15 +7,15 @@ import ocd.dao.entities.Adventurer;
 import ocd.dao.interfaces.AdventurerDAO;
 
 /**
- * Created by Quentin Gangler on 20/11/2016.
+ * Created by Quentin Gangler on 21/11/2016.
  *
  */
-public class CreateAdventurerCommand extends OCDCommand{
+public class CreateCommand extends OCDCommand {
 
     private AdventurerDAO adventurerDAO;
 
-    public CreateAdventurerCommand(AdventurerDAO adventurerDAO) {
-        super("adventurers.create", 1, "create a new adventurer");
+    public CreateCommand(AdventurerDAO adventurerDAO) {
+        super("create", 1, "create a new adventurer");
         this.adventurerDAO = adventurerDAO;
     }
 

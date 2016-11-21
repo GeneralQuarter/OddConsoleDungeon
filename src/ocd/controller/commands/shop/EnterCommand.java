@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.shop;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;
@@ -9,12 +9,12 @@ import ocd.dao.interfaces.EntityDAO;
  * Created by Quentin Gangler on 20/11/2016.
  *
  */
-public class EnterShopCommand extends OCDCommand {
+public class EnterCommand extends OCDCommand {
 
     private EntityDAO entityDAO;
 
-    public EnterShopCommand(EntityDAO entityDAO) {
-        super("shop.enter", 0, "move the adventurer to the shop");
+    public EnterCommand(EntityDAO entityDAO) {
+        super("enter", 0, "move the adventurer to the shop");
         this.entityDAO = entityDAO;
     }
 

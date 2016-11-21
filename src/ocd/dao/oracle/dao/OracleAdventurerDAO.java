@@ -23,33 +23,37 @@ public class OracleAdventurerDAO implements AdventurerDAO {
     }
 
     @Override
-    public void buyItem(Adventurer adventurer, Item item) {
+    public boolean buyItem(Adventurer adventurer, int itemID) {
         CallableStatement stm = null;
         try {
             stm = con.prepareCall("{call buyItem(?, ?)}");
             stm.setInt(1, adventurer.getId());
-            stm.setInt(2, item.getItemID());
+            stm.setInt(2, itemID);
             stm.execute();
+            return true;
         } catch (SQLException e) {
             OCDConsole.printlnError(e.getMessage());
         } finally {
             OracleDAOFactory.closeStatement(stm);
         }
+        return false;
     }
 
     @Override
-    public void sellItem(Adventurer adventurer, Item item) {
+    public boolean sellItem(Adventurer adventurer, int itemID) {
         CallableStatement stm = null;
         try {
             stm = con.prepareCall("{call sellItem(?, ?)}");
             stm.setInt(1, adventurer.getId());
-            stm.setInt(2, item.getItemID());
+            stm.setInt(2, itemID);
             stm.execute();
+            return true;
         } catch (SQLException e) {
             OCDConsole.printlnError(e.getMessage());
         } finally {
             OracleDAOFactory.closeStatement(stm);
         }
+        return false;
     }
 
     @Override

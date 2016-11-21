@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.adventurers;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;
@@ -9,15 +9,15 @@ import ocd.dao.interfaces.AdventurerDAO;
 import java.util.List;
 
 /**
- * Created by Quentin Gangler on 20/11/2016.
+ * Created by Quentin Gangler on 21/11/2016.
  *
  */
-public class ListAdventurerCommand extends OCDCommand {
+public class ListCommand extends OCDCommand{
 
     private AdventurerDAO adventurerDAO;
 
-    public ListAdventurerCommand(AdventurerDAO adventurerDAO) {
-        super("adventurers.list", 0, "list all of your adventurers");
+    public ListCommand(AdventurerDAO adventurerDAO) {
+        super("list", 0, "list all of your adventurers");
         this.adventurerDAO = adventurerDAO;
     }
 
@@ -28,7 +28,7 @@ public class ListAdventurerCommand extends OCDCommand {
             for (Adventurer adventurer : adventurers) {
                 if (OCDController.hasCurrentAdventurer() &&
                         adventurer.getId() == OCDController.currentAdventurer.getId()) {
-                   OCDController.currentAdventurer.setStatus(adventurer.getStatus());
+                    OCDController.currentAdventurer.setStatus(adventurer.getStatus());
                 }
                 OCDConsole.printlnRender(adventurer.toString());
             }

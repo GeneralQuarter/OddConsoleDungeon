@@ -5,6 +5,8 @@ import ocd.dao.entities.Entity;
 import ocd.dao.entities.Inventory;
 import ocd.dao.entities.Item;
 
+import java.util.List;
+
 /**
  * Created by t00191774 on 16/11/2016.
  *
@@ -12,12 +14,12 @@ import ocd.dao.entities.Item;
 public class OracleInventoryDAO implements InventoryDAO{
 
     @Override
-    public Inventory getEquipment(Entity entity) {
+    public List<Item> getEquipment(Entity entity) {
         return null;
     }
 
     @Override
-    public Inventory getInventory(Entity entity) {
+    public List<Item> getInventory(Entity entity) {
         return null;
     }
 

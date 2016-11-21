@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface AdventurerDAO {
 
-    void buyItem(Adventurer adventurer, Item item);
-    void sellItem(Adventurer adventurer, Item item);
+    boolean buyItem(Adventurer adventurer, int itemID);
+    boolean sellItem(Adventurer adventurer, int itemID);
     void nextFight(Adventurer adventurer);
     void flee(Adventurer adventurer);
     List<Adventurer> getAdventurersOfLord(Lord lord);
