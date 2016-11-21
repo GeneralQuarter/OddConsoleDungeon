@@ -9,12 +9,12 @@ import ocd.dao.interfaces.AdventurerDAO;
  * Created by Quentin Gangler on 21/11/2016.
  *
  */
-public class BuyCommand extends OCDCommand{
+public class SellCommand extends OCDCommand {
 
     private AdventurerDAO adventurerDAO;
 
-    public BuyCommand(AdventurerDAO adventurerDAO) {
-        super("buy", 1, "buy an item");
+    public SellCommand(AdventurerDAO adventurerDAO) {
+        super("sell", 1, "sell an item");
         this.adventurerDAO = adventurerDAO;
     }
 
@@ -24,8 +24,8 @@ public class BuyCommand extends OCDCommand{
         try {
             int itemID = Integer.parseInt(idString);
             if (OCDController.verifyLordConnected() && OCDController.verifyCurrentAdventurer()) {
-                if (adventurerDAO.buyItem(OCDController.currentAdventurer, itemID)) {
-                    OCDConsole.printlnSuccess("Buy successful.");
+                if (adventurerDAO.sellItem(OCDController.currentAdventurer, itemID)) {
+                    OCDConsole.printlnSuccess("Sell successful.");
                 }
             }
         } catch (NumberFormatException e) {

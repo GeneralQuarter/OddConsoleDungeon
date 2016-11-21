@@ -5,10 +5,7 @@ import ocd.controller.commands.*;
 import ocd.dao.DAOFactory;
 import ocd.dao.entities.Adventurer;
 import ocd.dao.entities.Lord;
-import ocd.dao.interfaces.AdventurerDAO;
-import ocd.dao.interfaces.EntityDAO;
-import ocd.dao.interfaces.ItemDAO;
-import ocd.dao.interfaces.LordDAO;
+import ocd.dao.interfaces.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,7 @@ public class OCDController {
     private AdventurerDAO adventurerDAO;
     private ItemDAO itemDAO;
     private EntityDAO entityDAO;
+    private InventoryDAO inventoryDAO;
 
     public static Lord currentLord;
     public static Adventurer currentAdventurer;
@@ -35,6 +33,7 @@ public class OCDController {
         adventurerDAO = daoFactory.getAdventurerDAO();
         itemDAO = daoFactory.getItemDAO();
         entityDAO = daoFactory.getEntityDAO();
+        inventoryDAO = daoFactory.getInventoryDAO();
         initializeCommands();
         startGame();
     }
@@ -46,6 +45,7 @@ public class OCDController {
         commands.add(new StatusCommand(entityDAO));
         commands.add(new AdventurerCommands(lordDAO, adventurerDAO));
         commands.add(new ShopCommands(itemDAO, entityDAO, adventurerDAO));
+        commands.add(new InventoryCommands(inventoryDAO, entityDAO));
         commands.add(new ExitCommand());
         commands.add(new HelpCommand(commands));
         commandParser = new OCDCommandParser(commands);
@@ -61,7 +61,7 @@ public class OCDController {
             OCDCommand command = commandParser.parseCommand(nextLine);
             if (command != null) {
                 command.execute();
-                if (command.getName().equals("exit")) {
+                if (command instanceof ExitCommand) {
                     exitGame = true;
                 }
             }

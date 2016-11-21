@@ -14,5 +14,8 @@ public interface InventoryDAO {
 
     List<Item> getEquipment(Entity entity);
     List<Item> getInventory(Entity entity);
-    void moveItem(Inventory from, Inventory to, Item itemToMove);
+    boolean equipItem(Entity entity, int itemID);
+    boolean unequipItem(Entity entity, int itemID);
+    boolean dropItem(Entity entity, int itemID);
+    boolean moveItem(int inventoryIDFrom, int inventoryIDTo, int itemID);
 }

@@ -19,6 +19,7 @@ public class ShopCommands extends OCDCommand {
         subCommands.add(new ConsultCommand(itemDAO));
         subCommands.add(new EnterCommand(entityDAO));
         subCommands.add(new BuyCommand(adventurerDAO));
+        subCommands.add(new SellCommand(adventurerDAO));
         subCommands.add(new ExitCommand(entityDAO));
     }
 

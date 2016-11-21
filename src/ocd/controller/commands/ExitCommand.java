@@ -15,7 +15,7 @@ public class ExitCommand extends OCDCommand{
 
     @Override
     public void execute() {
-        OCDConsole.printlnRender("Exiting the game...");
+        OCDConsole.printlnSuccess("Exiting the game...");
     }
 
     @Override
