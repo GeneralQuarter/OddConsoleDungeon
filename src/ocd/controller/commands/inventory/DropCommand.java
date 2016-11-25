@@ -8,15 +8,16 @@ import ocd.dao.interfaces.EntityDAO;
 import ocd.dao.interfaces.InventoryDAO;
 
 /**
- * Created by Quentin Gangler on 21/11/2016.
+ * Created by Quentin Gangler on 24/11/2016.
  *
  */
-public class EquipCommand extends OCDCommand{
+public class DropCommand extends OCDCommand {
+
     private InventoryDAO inventoryDAO;
     private EntityDAO entityDAO;
 
-    public EquipCommand(InventoryDAO inventoryDAO, EntityDAO entityDAO) {
-        super("equip", 1, "equip an item from the adventurer's inventory");
+    public DropCommand(InventoryDAO inventoryDAO, EntityDAO entityDAO) {
+        super("drop", 1, "drop an item from the inventory");
         this.inventoryDAO = inventoryDAO;
         this.entityDAO = entityDAO;
     }
@@ -26,11 +27,11 @@ public class EquipCommand extends OCDCommand{
         String idString = getArgs().get(0);
         try {
             int itemID = Integer.parseInt(idString);
-            if (OCDController.verifyLordConnected() && OCDController.verifyCurrentAdventurer()) {
+            if (OCDController.isLordConnected() && OCDController.verifyCurrentAdventurer()) {
                 Entity entity = entityDAO.find(OCDController.currentAdventurer.getEntityID());
                 if (entity != null) {
-                    if (inventoryDAO.equipItem(entity, itemID)) {
-                        OCDConsole.printlnSuccess("The item has been equipped.");
+                    if (inventoryDAO.dropItem(entity, itemID)) {
+                        OCDConsole.printlnSuccess("The item has been dropped.");
                     }
                 }
             }

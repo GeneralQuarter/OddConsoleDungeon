@@ -10,17 +10,17 @@ import java.util.Properties;
  * Created by t00191774 on 17/11/2016.
  *
  */
-public class OCDProperties {
-    private final String FILENAME = "ocd.ini";
+class OCDProperties {
 
     private Properties prop;
 
-    public OCDProperties() {
+    OCDProperties() {
         prop = new Properties();
 
         InputStream fileStream = null;
         try {
-            fileStream = getClass().getClassLoader().getResourceAsStream(FILENAME);
+            String fileName = "ocd.ini";
+            fileStream = getClass().getClassLoader().getResourceAsStream(fileName);
             prop.load(fileStream);
         } catch (Exception e) {
             OCDConsole.printlnError("Cannot open file ocd.ini (Does it exist?)");
@@ -35,7 +35,7 @@ public class OCDProperties {
         }
     }
 
-    public String getProperty(String propertyName) {
+    String getProperty(String propertyName) {
         return prop.getProperty(propertyName);
     }
 }

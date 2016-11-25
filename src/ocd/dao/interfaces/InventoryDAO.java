@@ -1,7 +1,6 @@
 package ocd.dao.interfaces;
 
 import ocd.dao.entities.Entity;
-import ocd.dao.entities.Inventory;
 import ocd.dao.entities.Item;
 
 import java.util.List;

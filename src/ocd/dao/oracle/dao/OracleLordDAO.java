@@ -2,7 +2,6 @@ package ocd.dao.oracle.dao;
 
 import ocd.OCDConsole;
 import ocd.dao.interfaces.LordDAO;
-import ocd.dao.entities.Adventurer;
 import ocd.dao.entities.Lord;
 import ocd.dao.oracle.OracleDAOFactory;
 
@@ -69,6 +68,8 @@ public class OracleLordDAO implements LordDAO{
             return true;
         } catch (SQLException e) {
             OCDConsole.printlnError(e.getMessage());
+        } finally {
+            OracleDAOFactory.closeStatement(stm);
         }
         return false;
     }

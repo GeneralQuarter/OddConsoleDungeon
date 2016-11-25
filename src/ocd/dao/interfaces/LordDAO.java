@@ -1,6 +1,5 @@
 package ocd.dao.interfaces;
 
-import ocd.dao.entities.Adventurer;
 import ocd.dao.entities.Lord;
 
 

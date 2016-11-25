@@ -32,4 +32,11 @@ public class Monster {
     public int getEntityID() {
         return entityID;
     }
+
+    @Override
+    public String toString() {
+        return "@|magenta,bold " + getId() + ":|@" +
+                "@|cyan,bold " + getMonsterName() + "|@";
+
+    }
 }

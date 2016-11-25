@@ -1,6 +1,5 @@
 package ocd.dao.oracle.dao;
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
 import ocd.OCDConsole;
 import ocd.dao.interfaces.ItemDAO;
 import ocd.dao.entities.Adventurer;
@@ -24,11 +23,20 @@ public class OracleItemDAO implements ItemDAO {
 
     @Override
     public List<Item> consultShop(Adventurer adventurer) {
+        return consult("consultShop", adventurer);
+    }
+
+    @Override
+    public List<Item> consultLoot(Adventurer adventurer) {
+        return consult("consultLoot", adventurer);
+    }
+
+    private List<Item> consult(String function, Adventurer adventurer) {
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<Item> results = new ArrayList<>();
         try {
-            stm = con.prepareStatement("SELECT * FROM TABLE(consultShop(?))");
+            stm = con.prepareStatement("SELECT * FROM TABLE(" + function + "(?))");
             stm.setInt(1, adventurer.getId());
             rs = stm.executeQuery();
             while (rs.next()) {
@@ -52,10 +60,5 @@ public class OracleItemDAO implements ItemDAO {
             OracleDAOFactory.closeStatement(stm);
         }
         return results;
-    }
-
-    @Override
-    public List<Item> consultLoot(Adventurer adventurer) {
-        return null;
     }
 }

@@ -78,7 +78,7 @@ public class OracleDAOFactory extends DAOFactory{
         }
     }
 
-    public static void closeConnection() {
+    private static void closeConnection() {
         try {
             if (con != null) {
                 con.close();

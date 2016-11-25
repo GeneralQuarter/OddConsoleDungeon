@@ -1,4 +1,4 @@
-package ocd.controller.commands;
+package ocd.controller.commands.adventurers;
 
 import ocd.OCDConsole;
 import ocd.controller.OCDCommand;

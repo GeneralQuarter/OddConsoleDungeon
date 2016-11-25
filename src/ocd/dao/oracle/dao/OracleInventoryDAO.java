@@ -3,7 +3,6 @@ package ocd.dao.oracle.dao;
 import ocd.OCDConsole;
 import ocd.dao.interfaces.InventoryDAO;
 import ocd.dao.entities.Entity;
-import ocd.dao.entities.Inventory;
 import ocd.dao.entities.Item;
 import ocd.dao.oracle.OracleDAOFactory;
 

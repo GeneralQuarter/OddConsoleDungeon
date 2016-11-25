@@ -1,7 +1,6 @@
 package ocd.dao.interfaces;
 
 import ocd.dao.entities.Adventurer;
-import ocd.dao.entities.Item;
 import ocd.dao.entities.Lord;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public interface AdventurerDAO {
 
     boolean buyItem(Adventurer adventurer, int itemID);
     boolean sellItem(Adventurer adventurer, int itemID);
-    void nextFight(Adventurer adventurer);
-    void flee(Adventurer adventurer);
+    boolean nextFight(Adventurer adventurer);
+    boolean flee(Adventurer adventurer);
     List<Adventurer> getAdventurersOfLord(Lord lord);
     Adventurer createAdventurer(Lord lord, String name);
     Adventurer find(int id);

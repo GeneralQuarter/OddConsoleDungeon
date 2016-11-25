@@ -9,18 +9,18 @@ import java.util.List;
  * Created by Quentin Gangler on 20/11/2016.
  *
  */
-public class OCDCommandParser {
+class OCDCommandParser {
 
     private List<OCDCommand> commands;
     private OCDCommand currentCommand;
     private String name;
     private List<String> args;
 
-    public OCDCommandParser(List<OCDCommand> commands) {
+    OCDCommandParser(List<OCDCommand> commands) {
         this.commands = commands;
     }
 
-    public OCDCommand parseCommand(String line) {
+    OCDCommand parseCommand(String line) {
         if (isCommandEmpty(Arrays.asList(line.split(" ")))) {
             if (findCommand(name, commands, args)) {
                 if (validateCommandSyntax()) {

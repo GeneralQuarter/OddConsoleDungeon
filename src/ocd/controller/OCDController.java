@@ -17,13 +17,13 @@ import java.util.Scanner;
  */
 public class OCDController {
 
-    private List<OCDCommand> commands;
     private OCDCommandParser commandParser;
     private LordDAO lordDAO;
     private AdventurerDAO adventurerDAO;
     private ItemDAO itemDAO;
     private EntityDAO entityDAO;
     private InventoryDAO inventoryDAO;
+    private MonsterDAO monsterDAO;
 
     public static Lord currentLord;
     public static Adventurer currentAdventurer;
@@ -34,24 +34,26 @@ public class OCDController {
         itemDAO = daoFactory.getItemDAO();
         entityDAO = daoFactory.getEntityDAO();
         inventoryDAO = daoFactory.getInventoryDAO();
+        monsterDAO = daoFactory.getMonsterDAO();
         initializeCommands();
-        startGame();
     }
 
     private void initializeCommands() {
-        commands = new ArrayList<>();
+        List<OCDCommand> commands = new ArrayList<>();
         commands.add(new RegisterCommand(lordDAO));
         commands.add(new LoginCommand(lordDAO, adventurerDAO));
-        commands.add(new StatusCommand(entityDAO));
-        commands.add(new AdventurerCommands(lordDAO, adventurerDAO));
+        commands.add(new AdventurerCommands(lordDAO, adventurerDAO, entityDAO));
         commands.add(new ShopCommands(itemDAO, entityDAO, adventurerDAO));
         commands.add(new InventoryCommands(inventoryDAO, entityDAO));
+        commands.add(new FightCommand(adventurerDAO, monsterDAO, entityDAO));
+        commands.add(new FleeCommand(adventurerDAO));
+        commands.add(new MonsterCommands(monsterDAO, entityDAO, itemDAO, inventoryDAO));
         commands.add(new ExitCommand());
         commands.add(new HelpCommand(commands));
         commandParser = new OCDCommandParser(commands);
     }
 
-    private void startGame() {
+    public void startGame() {
         boolean exitGame = false;
         Scanner in = new Scanner(System.in);
         while (!exitGame) {

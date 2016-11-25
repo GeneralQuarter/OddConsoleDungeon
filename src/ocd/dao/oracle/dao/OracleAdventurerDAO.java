@@ -4,7 +4,6 @@ import ocd.OCDConsole;
 import ocd.dao.interfaces.AdventurerDAO;
 import ocd.dao.oracle.OracleDAOFactory;
 import ocd.dao.entities.Adventurer;
-import ocd.dao.entities.Item;
 import ocd.dao.entities.Lord;
 
 import java.sql.*;
@@ -57,31 +56,35 @@ public class OracleAdventurerDAO implements AdventurerDAO {
     }
 
     @Override
-    public void nextFight(Adventurer adventurer) {
+    public boolean nextFight(Adventurer adventurer) {
         CallableStatement stm = null;
         try {
             stm = con.prepareCall("{call nextFight(?)}");
             stm.setInt(1, adventurer.getId());
             stm.execute();
+            return true;
         } catch (SQLException e) {
             OCDConsole.printlnError(e.getMessage());
         } finally {
             OracleDAOFactory.closeStatement(stm);
         }
+        return false;
     }
 
     @Override
-    public void flee(Adventurer adventurer) {
+    public boolean flee(Adventurer adventurer) {
         CallableStatement stm = null;
         try {
             stm = con.prepareCall("{call flee(?)}");
             stm.setInt(1, adventurer.getId());
             stm.execute();
+            return true;
         } catch (SQLException e) {
             OCDConsole.printlnError(e.getMessage());
         } finally {
             OracleDAOFactory.closeStatement(stm);
         }
+        return false;
     }
 
     @Override

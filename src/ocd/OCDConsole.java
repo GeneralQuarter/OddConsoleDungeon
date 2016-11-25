@@ -8,11 +8,11 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class OCDConsole {
 
-    public static void clearScreen() {
+    static void clearScreen() {
         System.out.println(ansi().eraseScreen());
     }
 
-    public static void lineReturn() {
+    static void lineReturn() {
         System.out.print("\n");
     }
 
@@ -26,7 +26,7 @@ public class OCDConsole {
         lineReturn();
     }
 
-    public static void printWithAttributes(String msg, String... attributes) {
+    static void printWithAttributes(String msg, String... attributes) {
         System.out.print(ansi().render("@|" + String.join(",", attributes) + " " + msg + "|@"));
     }
 

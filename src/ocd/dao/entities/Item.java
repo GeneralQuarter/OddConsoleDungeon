@@ -77,7 +77,7 @@ public class Item {
         String secondPart = "@|yellow,bold $" + getPrice() + "|@ " +
                 "bonuses: (health = @|green,bold " + getBonusHealth() + "%|@, " +
                 "defense = @|green,bold " + getBonusDefense() + "%|@, " +
-                "attack = @|green,bold " + getBonusDefense() + "%|@, " +
+                "attack = @|green,bold " + getBonusAttack() + "%|@, " +
                 "critical = @|green,bold " + getBonusCritical() + "%|@)";
         String format = "%-100s %-200s%n";
         return String.format(format, firstPart, secondPart);

@@ -41,6 +41,6 @@ public class UnEquipCommand extends OCDCommand {
 
     @Override
     public String getSyntax() {
-        return getName();
+        return getName() + " <item id>";
     }
 }

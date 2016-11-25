@@ -30,16 +30,31 @@ public class ConsultCommand extends OCDCommand{
         if (OCDController.verifyLordConnected() && OCDController.verifyCurrentAdventurer()) {
             Entity entity = entityDAO.find(OCDController.currentAdventurer.getEntityID());
             if (entity != null) {
-                OCDConsole.printlnRender("@|cyan,bold Inventory:|@");
                 List<Item> inventory = inventoryDAO.getInventory(entity);
+                OCDConsole.printlnRender("@|cyan,bold Inventory (" +
+                        + inventory.size() + "/12):|@");
                 for (Item item : inventory) {
-                    OCDConsole.printlnRender(item.toString());
+                    OCDConsole.printRender(item.toString());
                 }
-                OCDConsole.printlnRender("@|cyan,bold Equipment:|@");
                 List<Item> equipment = inventoryDAO.getEquipment(entity);
+                OCDConsole.printlnRender("@|cyan,bold Equipment (" +
+                         + equipment.size() + "):|@");
+                double totalBonusHealth = 0.0;
+                double totalBonusDefense = 0.0;
+                double totalBonusAttack = 0.0;
+                double totalBonusCritical = 0.0;
                 for (Item item : equipment) {
-                    OCDConsole.printlnRender(item.toString());
+                    OCDConsole.printRender(item.toString());
+                    totalBonusAttack += item.getBonusAttack();
+                    totalBonusCritical += item.getBonusCritical();
+                    totalBonusDefense += item.getBonusDefense();
+                    totalBonusHealth += item.getBonusHealth();
                 }
+                OCDConsole.printlnRender("@|cyan,bold \nTotal bonuses: |@" +
+                        " health = @|green,bold " + totalBonusHealth + "%|@" +
+                        ", defense = @|green,bold " + totalBonusDefense + "%|@" +
+                        ", attack = @|green,bold " + totalBonusAttack + "%|@" +
+                        ", critical = @|green,bold " + totalBonusCritical + "%|@");
             }
         }
     }

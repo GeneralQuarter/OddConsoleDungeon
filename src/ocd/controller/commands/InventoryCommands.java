@@ -2,6 +2,7 @@ package ocd.controller.commands;
 
 import ocd.controller.OCDCommand;
 import ocd.controller.commands.inventory.ConsultCommand;
+import ocd.controller.commands.inventory.DropCommand;
 import ocd.controller.commands.inventory.EquipCommand;
 import ocd.controller.commands.inventory.UnEquipCommand;
 import ocd.dao.interfaces.EntityDAO;
@@ -19,6 +20,7 @@ public class InventoryCommands extends OCDCommand {
         subCommands.add(new ConsultCommand(inventoryDAO, entityDAO));
         subCommands.add(new EquipCommand(inventoryDAO, entityDAO));
         subCommands.add(new UnEquipCommand(inventoryDAO, entityDAO));
+        subCommands.add(new DropCommand(inventoryDAO, entityDAO));
     }
 
     @Override
